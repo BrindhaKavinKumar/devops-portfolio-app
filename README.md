@@ -146,4 +146,4 @@ Monitoring is implemented using:
 
 **Brindha**
 
-Aspiring DevOps Engineer
+Aspiring DevOps Engineer | Learning Cloud, Infrastructure as Code, and DevOps Practices
