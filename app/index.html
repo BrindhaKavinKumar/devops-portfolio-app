@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Portfolio App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <p class="eyebrow">DevOps Demo App</p>
+            <h1>DevOps Portfolio App with CI/CD and Monitoring</h1>
+            <h2>Brindha Balasubramanian</h2>
+            <p class="tagline">
+                An aspiring DevOps Engineer passionate about automation, infrastructure as code,
+                CI/CD pipelines, containerization, Kubernetes, and observability.
+            </p>
+
+            <div class="jenkins-banner">
+                🚀 Deployed through Jenkins Pipeline
+            </div>
+        </header>
+
+        <section class="card tools-section">
+            <h3>Tools Used</h3>
+            <div class="tool-list">
+                <span>Terraform</span>
+                <span>Docker</span>
+                <span>Jenkins</span>
+                <span>Kubernetes</span>
+                <span>Prometheus</span>
+                <span>Grafana</span>
+            </div>
+        </section>
+
+        <section class="card deployment-section">
+            <h3>Deployment Details</h3>
+            <div class="deployment-grid">
+                <div class="deployment-item">
+                    <p class="label">Version</p>
+                    <p class="value">v1.0.0</p>
+                </div>
+                <div class="deployment-item">
+                    <p class="label">Deployment Timestamp</p>
+                    <p class="value" id="deployTime">Loading...</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer card">
+            <h3>Environment</h3>
+            <p>Environment: Kubernetes (k3s) on AWS EC2</p>
+            <p>Pipeline: Jenkins CI/CD</p>
+            <p class="footer-highlight">
+                Running on Kubernetes | Built with Docker | Provisioned by Terraform
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("deployTime").textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
