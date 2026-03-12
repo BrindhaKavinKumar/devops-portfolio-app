@@ -10,6 +10,7 @@ The application is a static **HTML and CSS webpage served with Nginx**, while th
 * **AWS EC2** – Cloud infrastructure
 * **Terraform** – Infrastructure as Code
 * **Docker** – Containerization
+* **Docker Hub** – Container registry
 * **Jenkins** – CI/CD pipeline
 * **Kubernetes (k3s)** – Application deployment
 * **Prometheus** – Metrics collection
@@ -27,12 +28,14 @@ Developer pushes code → GitHub
                         ↓
                 Docker image build
                         ↓
-             Deploy container to Kubernetes
+              Push image to Docker Hub
+                        ↓
+             Deploy container to Kubernetes(k3s)
                         ↓
         Prometheus collects metrics → Grafana dashboards
 ```
 
-Infrastructure is provisioned using **Terraform on AWS**.
+Infrastructure is provisioned using **Terraform on AWS EC2**.
 
 ---
 
@@ -58,8 +61,8 @@ devops-portfolio-app
 │   ├── deployment.yaml
 │   └── service.yaml
 │
-├── jenkins
-│   └── Jenkinsfile
+├── Jenkinsfile
+│   
 │
 └── README.md
 ```
@@ -70,6 +73,8 @@ devops-portfolio-app
 
 The application is a simple static webpage built using **HTML and CSS**.
 It is served using **Nginx inside a Docker container**.
+
+![Application Running](screenshots/app-running.png)
 
 ---
 
@@ -112,6 +117,21 @@ docker run -p 8080:80 devops-portfolio-app
 
 ---
 
+
+## CI/CD Pipeline (Jenkins)
+
+The Jenkins pipeline automates the application lifecycle:
+
+1. Pull code from GitHub
+2. Build Docker image
+3. Push image to Docker Hub
+4. Deploy the application to Kubernetes
+
+![Jenkins Pipeline](screenshots/jenkins-pipeline.png)
+
+
+---
+
 ## Kubernetes Deployment
 
 The application is deployed to Kubernetes using:
@@ -122,6 +142,7 @@ The application is deployed to Kubernetes using:
 ```id="kafm7b"
 kubectl apply -f k8s/
 ```
+![Kubernetes Pods](screenshots/k8s-pods.png)
 
 ---
 
@@ -132,18 +153,22 @@ Monitoring is implemented using:
 * **Prometheus** for metrics collection
 * **Grafana** for dashboards and visualization
 
+Grafana dashboards display metrics such as **CPU usage, memory consumption, and container activity**.
+
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+
 ---
 
 ## What This Project Demonstrates
 
 * Infrastructure as Code with Terraform
-* CI/CD pipeline automation with Jenkins
+* Automated CI/CD pipeline with Jenkins
 * Containerized applications using Docker
-* Kubernetes deployments
-* Monitoring with Prometheus and Grafana
+* Kubernetes deployment and orchestration
+* Monitoring and observability with Prometheus and Grafana
 
 ---
 
 **Brindha**
 
-Aspiring DevOps Engineer | Learning Cloud, Infrastructure as Code, and DevOps Practices.
+Aspiring DevOps Engineer | Learning Cloud, Infrastructure as Code, and DevOps Practices
