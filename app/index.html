@@ -31,6 +31,8 @@
                 <span>Kubernetes</span>
                 <span>Prometheus</span>
                 <span>Grafana</span>
+                <span>AWS EC2</span>
+                <span>Docker Hub</span>
             </div>
         </section>
 
@@ -41,11 +43,33 @@
                     <p class="label">Version</p>
                     <p class="value">v1.0.0</p>
                 </div>
+
                 <div class="deployment-item">
                     <p class="label">Deployment Timestamp</p>
                     <p class="value" id="deployTime">Loading...</p>
                 </div>
+
+                <div class="deployment-item">
+                    <p class="label">Build Number</p>
+                    <p class="value" id="buildNumber">Loading...</p>
+                </div>
+
+                <div class="deployment-item">
+                    <p class="label">Environment</p>
+                    <p class="value" id="environment">Loading...</p>
+                </div>
             </div>
+        </section>
+
+        <section class="card about-section">
+            <h3>Project Highlights</h3>
+            <ul class="highlights-list">
+                <li>Provisioned infrastructure using Terraform on AWS</li>
+                <li>Containerized application using Docker and Nginx</li>
+                <li>Automated CI/CD workflow with Jenkins</li>
+                <li>Deployed application to Kubernetes (k3s)</li>
+                <li>Integrated monitoring with Prometheus and Grafana</li>
+            </ul>
         </section>
 
         <footer class="footer card">
@@ -59,7 +83,21 @@
     </div>
 
     <script>
-        document.getElementById("deployTime").textContent = new Date().toLocaleString();
+        const deployTimeElement = document.getElementById("deployTime");
+        if (deployTimeElement) {
+            deployTimeElement.textContent = new Date().toLocaleString();
+        }
+
+        const buildNumberElement = document.getElementById("buildNumber");
+        if (buildNumberElement) {
+            const buildNumber = "Build #local";
+            buildNumberElement.textContent = buildNumber;
+        }
+
+        const environmentElement = document.getElementById("environment");
+        if (environmentElement) {
+            environmentElement.textContent = "Kubernetes (k3s) on AWS EC2";
+        }
     </script>
 </body>
 </html>
