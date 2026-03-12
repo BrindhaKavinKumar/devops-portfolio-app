@@ -74,7 +74,7 @@ devops-portfolio-app
 The application is a simple static webpage built using **HTML and CSS**.
 It is served using **Nginx inside a Docker container**.
 
-![Application Running](screenshots/app-running.png.jpg)
+![Application Running](screenshots/app-running.jpg)
 
 ---
 
@@ -127,7 +127,7 @@ The Jenkins pipeline automates the application lifecycle:
 3. Push image to Docker Hub
 4. Deploy the application to Kubernetes
 
-![Jenkins Pipeline](screenshots/jenkins-pipeline.png.jpg)
+![Jenkins Pipeline](screenshots/jenkins-pipeline.jpg)
 
 
 ---
@@ -142,7 +142,7 @@ The application is deployed to Kubernetes using:
 ```id="kafm7b"
 kubectl apply -f k8s/
 ```
-![Kubernetes Pods](screenshots/k8s-pods.png.jpg)
+![Kubernetes Pods](screenshots/k8s-pods.jpg)
 
 ---
 
@@ -155,7 +155,7 @@ Monitoring is implemented using:
 
 Grafana dashboards display metrics such as **CPU usage, memory consumption, and container activity**.
 
-![Grafana Dashboard](screenshots/grafana-dashboard.png.jpg)
+![Grafana Dashboard](screenshots/grafana-dashboard.jpg)
 
 ---
 
