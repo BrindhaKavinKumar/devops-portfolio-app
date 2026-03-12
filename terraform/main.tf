@@ -1,6 +1,6 @@
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
- tags = {
+  tags = {
     Name = "Portfolio-VPC"
   }
 }
@@ -91,12 +91,12 @@ resource "aws_security_group" "sg" {
   }
 
   ingress {
-  description = "Kubernetes App NodePort"
-  from_port   = 30080
-  to_port     = 30080
-  protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-}
+    description = "Kubernetes App NodePort"
+    from_port   = 30080
+    to_port     = 30080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
@@ -106,22 +106,29 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-  Name = "Portfolio-SG"
-}
+    Name = "Portfolio-SG"
+  }
 
 }
 
 
 resource "aws_instance" "portfolioapp" {
   ami                         = var.ami
-  instance_type               = "t3.micro"
+  instance_type               = "t3.small"
   key_name                    = var.key_name
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
   associate_public_ip_address = true
 
 
+
   tags = {
     Name = "Portfolio app Instance"
   }
+}
+
+resource "aws_ec2_instance_state" "portfolioapp_state" {
+  instance_id = aws_instance.portfolioapp.id
+  state       = "running"
+
 }

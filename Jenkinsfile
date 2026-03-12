@@ -2,10 +2,15 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'brindhakavinkumar/devops-portfolio-app:latest'
+        IMAGE_NAME = "brindhakavinkumar/devops-portfolio-app:latest"
     }
 
     stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
 
         stage('Build Image') {
             steps {
@@ -21,12 +26,8 @@ pipeline {
 
         stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'DOCKER_USERNAME',
-                    passwordVariable: 'DOCKER_PASSWORD'
-                )]) {
-                    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                 }
             }
         }
@@ -37,12 +38,12 @@ pipeline {
             }
         }
 
-        stage('Deploy Container') {
+        stage('Deploy to Kubernetes') {
             steps {
-                sh 'docker stop portfolio-app-container || true'
-                sh 'docker rm portfolio-app-container || true'
-                sh 'docker pull $IMAGE_NAME'
-                sh 'docker run -d -p 80:80 --name portfolio-app-container $IMAGE_NAME'
+                sh '/usr/local/bin/kubectl apply -f k8s/deployment.yaml'
+                sh '/usr/local/bin/kubectl apply -f k8s/service.yaml'
+                sh '/usr/local/bin/kubectl rollout restart deployment portfolio-app'
+                sh '/usr/local/bin/kubectl rollout status deployment portfolio-app'
             }
         }
     }
