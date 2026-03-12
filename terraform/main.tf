@@ -75,16 +75,16 @@ resource "aws_security_group" "sg" {
 
   ingress {
     description = "prometheus"
-    from_port   = 9090
-    to_port     = 9090
+    from_port   = 32090
+    to_port     = 32090
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     description = "Grafana"
-    from_port   = 3000
-    to_port     = 3000
+    from_port   = 32000
+    to_port     = 32000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
 
@@ -114,7 +114,7 @@ resource "aws_security_group" "sg" {
 
 resource "aws_instance" "portfolioapp" {
   ami                         = var.ami
-  instance_type               = "t3.small"
+  instance_type               = "t3.medium"
   key_name                    = var.key_name
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
